@@ -38,7 +38,6 @@ tree_node* find_node(tree_node* current, string value) {
         // Переходим к следующему брату
         child = child->next_brother;
     }
-
     // Если ничего не нашли, возвращаем nullptr
     return nullptr;
 }

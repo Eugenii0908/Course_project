@@ -4,7 +4,6 @@
 #include <windows.h>
 using namespace std;
 
-
 // Определение констант для клавиш
 const char ESCAPE = 27;   // Клавиша ESC
 const char ENTER = 13;    // Клавиша Enter
