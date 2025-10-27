@@ -21,9 +21,15 @@
     <ClCompile Include="interface_lib.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
+    <ClCompile Include="Priority_queue_lib.cpp">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="interface_lib.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Priority_queue_lib.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

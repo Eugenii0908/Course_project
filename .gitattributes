@@ -4,6 +4,28 @@
 * text=auto
 
 ###############################################################################
+# Set UTF-8 encoding for source code files
+###############################################################################
+*.cpp text charset=utf-8
+*.h text charset=utf-8
+*.hpp text charset=utf-8
+*.c text charset=utf-8
+*.cs text charset=utf-8
+*.java text charset=utf-8
+*.py text charset=utf-8
+*.js text charset=utf-8
+*.ts text charset=utf-8
+*.html text charset=utf-8
+*.css text charset=utf-8
+*.xml text charset=utf-8
+*.json text charset=utf-8
+*.md text charset=utf-8
+*.txt text charset=utf-8
+*.yml text charset=utf-8
+*.yaml text charset=utf-8
+*.config text charset=utf-8
+
+###############################################################################
 # Set default behavior for command prompt diff.
 #
 # This is need for earlier builds of msysgit that does not have it on by
