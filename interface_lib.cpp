@@ -58,6 +58,7 @@ void free_subtree(tree_node* node) {
 }
 
 // Добавление узла как потомка указанного родителя
+// 0 - родитель не найден; 1 - узел добавлен
 bool add_node(string parent_name, string new_name, string new_text, string* list, int size_list, fun_ptr fun) {
     // Если дерево пустое, создаем корень
     if (root == nullptr) {
@@ -95,6 +96,7 @@ bool add_node(string parent_name, string new_name, string new_text, string* list
 }
 
 // Удаление узла и всего его поддерева
+// 0 - узел не найден; 1 - узел удален
 bool remove_node(string value) {
     if (root == nullptr) return false;
 
@@ -162,18 +164,18 @@ void move_arr(int position, string items[], int size_items, string text) {
 }
 
 // Функция для навигации по меню с помощью клавиш
-bool dynamic_menu(int& position, string items[], int size_items, string text) {
+void dynamic_menu(int& position, string items[], int size_items, string text) {
     char symbol;
     move_arr(position, items, size_items, text);  // Первоначальное отображение меню
     do {
         symbol = _getch();  // Получение нажатой клавиши
         if (symbol == ENTER) {
             move_arr(position, items, size_items, text);
-            return true;
+            return;
         }
         if (symbol == ESCAPE) {
             position = -2;  // Выход из меню
-            return true;
+            return;
         }
         if (symbol == -32 && _kbhit()) {  // Обработка стрелок
             char sub_symbol;
@@ -201,17 +203,18 @@ bool dynamic_menu(int& position, string items[], int size_items, string text) {
             }
             if (sub_symbol == 75) {  // Стрелка влево
                 position = -1;
-                return true;
+                return;
             }
             if (sub_symbol == 77) {  // Стрелка вправо
                 move_arr(position, items, size_items, text);
-                return true;
+                return;
             }
         }
     } while (symbol != ENTER);
 }
 
-// Меню Да/Нет
+// Меню нет/да
+// 0 - нет; 1 - да
 int no_or_yes(string menu) {
     string list[2] = { "Нет", "Да" };
     int position = 0;
@@ -271,13 +274,10 @@ void cycle() {
     while (position > -1) { 
         // Отображение меню
         dynamic_menu(position, menu_pointer->list, menu_pointer->size_list, menu_pointer->text);
-        // Если в узле есть переданная функция для выполнения - выполняем
-        if (menu_pointer->function != nullptr)
-            menu_pointer->function();
         // Если нажат ESCAPE - выходим в главное меню
         if (position == -2) {
             // Если нажат ESCAPE в главном меню - уточняем о выходе
-            if (menu_pointer == root and no_or_yes("Вы уверены, что хотите выйти?") == 1)
+            if (menu_pointer == root and no_or_yes("Вы уверены, что хотите выйти?\n") == 1)
                 return;
             menu_pointer = root;
             position = 0;
@@ -286,7 +286,7 @@ void cycle() {
         // Если нажата стребка влево - выходим на меню назад
         if (position == -1) {
             // Если нажата стрелка влево в главном меню - уточняем о выходе
-            if (menu_pointer == root and no_or_yes("Вы уверены, что хотите выйти?") == 1)
+            if (menu_pointer == root and no_or_yes("Вы уверены, что хотите выйти?\n") == 1)
                 return;
             else if (menu_pointer != root) {
                 menu_pointer = menu_pointer->father;
@@ -308,9 +308,23 @@ void cycle() {
                     menu_pointer = menu_pointer->next_brother;
                 }
             }
+            // Если в узле есть переданная функция для выполнения - выполняем
+            if (menu_pointer->function != nullptr) {
+                int result = menu_pointer->function();
+                // Переход на меню назад
+                if (result == -1)
+                    menu_pointer = menu_pointer->father;
+                // Переход в главное меню
+                if (result == -2)
+                    menu_pointer = root;
+                // Переход в главное меню с сохранением указателя на пункт
+                if (result == -3) {
+                    menu_pointer = root;
+                    continue;
+                }
+            }
             position = 0;
         }
     }
-
     return;
 }
