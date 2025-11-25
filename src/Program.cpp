@@ -1,5 +1,5 @@
-﻿#include "interface_lib.h"
-#include "Priority_queue_lib.h"
+﻿#include "../include/interface_lib.h"
+#include "../include/Priority_queue_lib.h"
 #include <fstream>
 #include <string>
 

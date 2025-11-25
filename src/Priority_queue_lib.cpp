@@ -1,4 +1,4 @@
-﻿#include "Priority_queue_lib.h"
+﻿#include "../include/Priority_queue_lib.h"
 
 // Указатель на первого в очереди
 qu_elm* head_ptr = nullptr;

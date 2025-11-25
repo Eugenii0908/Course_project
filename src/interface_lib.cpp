@@ -1,4 +1,4 @@
-#include "interface_lib.h"
+#include "../include/interface_lib.h"
 
 // Глобальный корень дерева
 tree_node* root = nullptr;

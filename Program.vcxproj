@@ -123,13 +123,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="interface_lib.cpp" />
-    <ClCompile Include="Priority_queue_lib.cpp" />
-    <ClCompile Include="Program.cpp" />
+    <ClCompile Include="src\interface_lib.cpp" />
+    <ClCompile Include="src\Priority_queue_lib.cpp" />
+    <ClCompile Include="src\Program.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="interface_lib.h" />
-    <ClInclude Include="Priority_queue_lib.h" />
+    <ClInclude Include="include\interface_lib.h" />
+    <ClInclude Include="include\Priority_queue_lib.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
